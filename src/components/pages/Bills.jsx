@@ -4,7 +4,7 @@ import Layout from "./Layout.jsx";
 function Bills() {
   return (
     <Layout>
-      <main className="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+
 
       {/* Page Title */}
       <div className="title-group mb-3">
@@ -95,7 +95,7 @@ function Bills() {
 
       </div>
 
-    </main>
+
     </Layout>
   );
 }

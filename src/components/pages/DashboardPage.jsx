@@ -4,7 +4,7 @@ function DashboardPage() {
   return (
 
     <Layout>
-    <main className="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+
 
       {/* Title */}
       <div className="title-group mb-3">
@@ -184,28 +184,7 @@ function DashboardPage() {
 
       </div>
 
-      {/* Footer */}
-      <footer className="site-footer">
 
-        <div className="container">
-
-          <div className="row">
-
-            <div className="col-lg-12 col-12">
-
-              <p className="copyright-text">
-                Copyright © FinFlow 2026
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </footer>
-
-    </main>
     </Layout>
   );
 }

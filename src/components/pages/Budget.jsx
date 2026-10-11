@@ -3,7 +3,7 @@ import Layout from "./Layout.jsx";
 function Budget() {
   return (
     <Layout>
-    <main className="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+
 
       {/* Page Title */}
       <div className="title-group mb-3">
@@ -125,7 +125,7 @@ function Budget() {
 
       </div>
 
-    </main>
+
     </Layout>
   );
 }
