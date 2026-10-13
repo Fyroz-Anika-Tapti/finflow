@@ -3,9 +3,13 @@ import { useState } from "react";
 
 
 import DashboardPage from "./components/pages/DashboardPage.jsx";
+import TransactionHead from "./components/pages/Transaction_head/Index.jsx";
+import TransactionHeadCreate from "./components/pages/Transaction_head/Create.jsx";
+
 import Transactions from "./components/pages/Transactions/Index.jsx";
 import TransactionCreate from "./components/pages/Transactions/Create.jsx";
-import TransactionEdit from "./components/pages/Transactions/Edit.jsx";
+
+
 import Budget from "./components/pages/Budget.jsx";
 import SavingsGoals from "./components/pages/SavingsGoals.jsx";
 import Bills from "./components/pages/Bills.jsx";
@@ -20,9 +24,9 @@ function App() {
 
   const [isSignedIn, setIsSignedIn] = useState(() => {
     /* if you want, user will be logged in until they logout*/
-    //return localStorage.getItem("access_token") || false;
+    return localStorage.getItem("access_token") || false;
     /* if you want, user will be logged when they close the browser*/
-    return sessionStorage.getItem("access_token") || false;
+    //return sessionStorage.getItem("access_token") || false;
   });
   return (
     <BrowserRouter>
@@ -40,10 +44,16 @@ function App() {
 
           <Route path="logout" element={<Logout />} />
 
+          <Route path="transaction_head">
+            <Route index element={<TransactionHead />} />
+            <Route path="create" element={<TransactionHeadCreate />} />
+            <Route path="edit/:id" element={<TransactionHeadCreate />} />
+          </Route>
+
           <Route path="transactions">
             <Route index element={<Transactions />} />
             <Route path="create" element={<TransactionCreate />} />
-            <Route path="edit/:id" element={<TransactionEdit />} />
+            <Route path="edit/:id" element={<TransactionCreate />} />
           </Route>
 
           <Route path="/budget" element={<Budget />} />

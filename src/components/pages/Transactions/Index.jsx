@@ -1,70 +1,49 @@
-import React from 'react';
-import { Link } from 'react-router';
+
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Layout from "../Layout.jsx";
+import axios from "../../../Lib/axios.js";
 
 function Transactions() {
 
-  const [transactions, setTransactions] = React.useState([]);
+  const [transactions, setTransactions] = useState([]);
 
-  function fetchTransactions() {
-
-    fetch('http://localhost/finflow_api/transactions/index.php')
-      .then(response => response.json())
-      .then(data => setTransactions(data.data))
-      .catch(error =>
-        console.error('Error fetching transactions:', error)
-      );
-
+  const fetchTransactions = async () => {
+    let res = await axios.get(`transactions/index.php`);
+    setTransactions(res.data.data);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchTransactions();
   }, []);
 
-  function handleDelete(id) {
-
+  async function handleDelete(id) {
     if (window.confirm("Are you sure you want to delete this transaction?")) {
+      let res = await axios.delete(`transactions/delete.php ? id = ${id} `);
 
-      fetch(
-        `http://localhost/finflow_api/transactions/delete.php?id=${id}`,
-        {
-          method: 'DELETE'
-        }
-      )
-        .then(response => response.json())
-        .then(data => {
-
-          if (data.status) {
-            fetchTransactions();
-          }
-
-        })
-        .catch(error =>
-          console.error('Error deleting transaction:', error)
-        );
-
+      if (res.data.status) {
+        fetchTransactions();
+      } else {
+        alert(res.data.message);
+      }
     }
   }
 
   return (
     <Layout>
       <div className="container">
-
         <div className="page-inner">
 
-          {/* Page Header */}
           <div className="page-header">
-
             <h3 className="fw-bold mb-3">
               Transactions
             </h3>
 
             <ul className="breadcrumbs mb-3">
-
               <li className="nav-home">
-                <a href="#">
+                <Link to="/">
                   <i className="icon-home"></i>
-                </a>
+                </Link>
               </li>
 
               <li className="separator">
@@ -72,22 +51,19 @@ function Transactions() {
               </li>
 
               <li className="nav-item">
-                <a href="#">Transactions</a>
+                <Link to="/transactions">
+                  Transactions
+                </Link>
               </li>
-
             </ul>
-
           </div>
 
-          {/* Table Card */}
           <div className="row">
-
             <div className="col-md-12">
 
               <div className="card card-round">
 
                 <div className="card-header">
-
                   <div className="d-flex align-items-center">
 
                     <h4 className="card-title">
@@ -103,113 +79,73 @@ function Transactions() {
                     </Link>
 
                   </div>
-
                 </div>
 
                 <div className="card-body">
 
-                  {/* Search */}
-                  <div className="row mb-3">
-
-                    <div className="col-md-4">
-
-                      <div className="input-icon">
-
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Search transaction..."
-                        />
-
-                        <span className="input-icon-addon">
-                          <i className="fa fa-search"></i>
-                        </span>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  {/* Table */}
                   <div className="table-responsive">
-
-                    <table className="table table-hover">
+                    <table className="table table-bordered table-striped">
 
                       <thead>
-
                         <tr>
-                          <th>#</th>
-                          <th>User ID</th>
-                          <th>Head ID</th>
-                          <th>Dr</th>
-                          <th>Cr</th>
+                          <th>ID</th>
                           <th>Transaction Date</th>
-                          <th>Action</th>
+                          <th>Purpose</th>
+                          <th>Amount</th>
+                          <th>Actions</th>
                         </tr>
-
                       </thead>
 
                       <tbody>
+                        {transactions && transactions.length > 0 ? (
+                          transactions.map(transaction => (
+                            <tr key={transaction.id}>
 
-                        {transactions.map((transaction, index) => (
+                              <td>
+                                {transaction.id}
+                              </td>
 
-                          <tr key={transaction.id}>
+                              <td>
+                                {transaction.transaction_date}
+                              </td>
 
-                            <td>
-                              {index + 1}
-                            </td>
 
-                            <td>
-                              {transaction.user_id}
-                            </td>
+                              <td>
+                                {transaction.purpose}
+                              </td>
 
-                            <td>
-                              {transaction.Cost_income_head_id}
-                            </td>
-
-                            <td>
-                              {transaction.Dr}
-                            </td>
-
-                            <td>
-                              {transaction.Cr}
-                            </td>
-
-                            <td>
-                              {transaction.transaction_date}
-                            </td>
-
-                            <td>
-                              <div className="form-button-action">
-
+                              <td>
+                                {transaction.amount}
+                              </td>
+                              <td>
                                 <Link
                                   to={`/transactions/edit/${transaction.id}`}
-                                  className="btn btn-link btn-primary"
-                                  title="Edit"
+                                  className="btn btn-sm btn-warning me-2"
                                 >
-                                  <i className="bi bi-pencil-square"></i>
+                                  Edit
                                 </Link>
 
                                 <button
-                                  className="btn btn-link btn-danger"
-                                  title="Delete"
                                   onClick={() => handleDelete(transaction.id)}
+                                  className="btn btn-sm btn-danger"
                                 >
-                                  <i className="bi bi-trash"></i>
+                                  Delete
                                 </button>
 
-                              </div>
+                              </td>
+
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan="7" className="text-center">
+                              No transactions found
                             </td>
-
                           </tr>
-
-                        ))}
-
+                        )}
                       </tbody>
 
                     </table>
-
                   </div>
 
                 </div>
@@ -217,11 +153,9 @@ function Transactions() {
               </div>
 
             </div>
-
           </div>
 
         </div>
-
       </div>
     </Layout>
   );

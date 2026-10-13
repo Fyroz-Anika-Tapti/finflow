@@ -8,48 +8,30 @@ function Login() {
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
 
-    async function handleSubmit(event) {
+    function handleSubmit(event) {
         event.preventDefault();
-        setMessage("");
-        setLoading(true);
 
-        const form = new FormData(event.currentTarget);
+        const form = new FormData(event.target);
 
-        try {
-            const response = await axios.post(
-                `${import.meta.env.VITE_API_URL}login.php`,
-                {
-                    email: form.get("email"),
-                    password: form.get("password"),
+        axios
+            .post(`${import.meta.env.VITE_API_URL}login.php`, {
+                email: form.get("email"),
+                password: form.get("password")
+            })
+            .then((response) => {
+
+                if (response.data.status == false) {
+                    setMessage("Invalid email or password.");
+                } else {
+                    localStorage.setItem("access_token", response.data.jwt);
+                    localStorage.setItem("userdata", response.data.data);
+                    window.location.href = './dashboard';
                 }
-            );
+            })
+            .catch(() => {
+                setMessage("An error occurred while creating your account. Please try again.");
+            });
 
-            if (!response.data?.jwt) {
-                setMessage("Unable to sign in. Please try again.");
-                return;
-            }
-
-            sessionStorage.setItem(
-                "access_token",
-                response.data.jwt
-            );
-
-            sessionStorage.setItem(
-                "userdata",
-                typeof response.data.data === "string"
-                    ? response.data.data
-                    : JSON.stringify(response.data.data ?? {})
-            );
-
-            window.location.href = "./";
-        } catch (error) {
-            setMessage(
-                error.response?.data?.message ||
-                "Unable to sign in. Check your email and password."
-            );
-        } finally {
-            setLoading(false);
-        }
     }
 
     return (

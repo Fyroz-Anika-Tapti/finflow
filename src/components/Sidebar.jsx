@@ -19,6 +19,15 @@ function Sidebar() {
             </Link>
           </li>
 
+          {/* Cost*/}
+          <li className="nav-item">
+            <Link className="nav-link" to="/transaction_head">
+              <i className="bi-bullseye me-2"></i>
+              Transaction Head
+            </Link>
+          </li>
+
+
           {/* Transactions */}
           <li className="nav-item">
             <Link className="nav-link" to="/transactions">
