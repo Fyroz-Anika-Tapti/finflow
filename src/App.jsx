@@ -10,9 +10,13 @@ import Transactions from "./components/pages/Transactions/Index.jsx";
 import TransactionCreate from "./components/pages/Transactions/Create.jsx";
 
 
-import Budget from "./components/pages/Budget.jsx";
+import Budgets from "./components/pages/Budgets/Index.jsx";
+import BudgetsCreate from "./components/pages/Budgets/Create.jsx";
 import SavingsGoals from "./components/pages/SavingsGoals.jsx";
-import Bills from "./components/pages/Bills.jsx";
+
+import Bills from "./components/pages/Bills/Index.jsx";
+import BillsCreate from "./components/pages/Bills/Create.jsx";
+
 import Reports from "./components/pages/Reports.jsx";
 import Settings from "./components/pages/Settings.jsx";
 import Login from "./components/pages/Login.jsx";
@@ -56,9 +60,20 @@ function App() {
             <Route path="edit/:id" element={<TransactionCreate />} />
           </Route>
 
-          <Route path="/budget" element={<Budget />} />
+          <Route path="budgets">
+            <Route index element={<Budgets />} />
+            <Route path="create" element={<BudgetsCreate />} />
+            <Route path="edit/:id" element={<BudgetsCreate />} />
+          </Route>
+
+
           <Route path="/savings" element={<SavingsGoals />} />
-          <Route path="/bills" element={<Bills />} />
+
+          <Route path="bills">
+            <Route index element={<Bills />} />
+            <Route path="create" element={<BillsCreate />} />
+            <Route path="edit/:id" element={<BillsCreate />} />
+          </Route>
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
         </Route>

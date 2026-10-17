@@ -38,7 +38,7 @@ function Sidebar() {
 
           {/* Budget */}
           <li className="nav-item">
-            <Link className="nav-link" to="/budget">
+            <Link className="nav-link" to="/budgets">
               <i className="bi-pie-chart me-2"></i>
               Budget
             </Link>
@@ -57,6 +57,13 @@ function Sidebar() {
             <Link className="nav-link" to="/bills">
               <i className="bi-receipt me-2"></i>
               Bills
+            </Link>
+          </li>
+          {/* Loans */}
+          <li className="nav-item">
+            <Link className="nav-link" to="/loans">
+              <i className="bi-receipt me-2"></i>
+              Loans
             </Link>
           </li>
 

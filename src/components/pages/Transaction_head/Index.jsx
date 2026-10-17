@@ -5,7 +5,6 @@ import Layout from "../Layout.jsx";
 import axios from "../../../Lib/axios.js";
 function TransactionHead() {
     const [costs, setCosts] = useState([]);
-    const [headType, setHeadType] = useState({ cash: 1, bank: 2, income: 3, expense: 4, asset: 5, liability: 6, equity: 7, other: 8 });
 
     const fetchCosts = async (e) => {
         let res = await axios.get(`transaction_head/index.php`)
@@ -42,8 +41,7 @@ function TransactionHead() {
                         <tr>
                             <th>ID</th>
                             <th>Head Name</th>
-                            <th>Head Type</th>
-                            <th>Parent Head</th>
+                            <th>Parent ID</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -55,7 +53,6 @@ function TransactionHead() {
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
                                     <td>{item.head_name}</td>
-                                    <td>{Object.entries(headType).find(([, value]) => Number(value) === Number(item.head_type))?.[0] || item.head_type}</td>
                                     <td>{item.parent_head || "None"}</td>
                                     <td>
                                         {Number(item.status) === 1

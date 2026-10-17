@@ -73,7 +73,7 @@ function TransactionsCreate() {
     let url = '';
 
     if (id) {
-      url = `transactions/update.php?id = ${id} `;
+      url = `transactions/update.php?id=${id} `;
     } else {
       url = `transactions/create.php`;
     }
@@ -226,7 +226,7 @@ function TransactionsCreate() {
                           <td colSpan="3" className="text-end">
                             Total Amount: {formData.group_transctions.reduce((total, account) => total + parseFloat(account.amount || 0), 0).toFixed(2)}
 
-                            <input type="text" name="gross_amount" value={formData.group_transctions.reduce((total, account) => total + parseFloat(account.amount || 0), 0).toFixed(2)} readOnly />
+                            <input type="text" name="gross_amount" value={formData.group_transctions.reduce((total, account) => total + parseFloat(account.amount || 0), 0).toFixed(2)} readOnly hidden />
                           </td>
                           <td>
                             <button
