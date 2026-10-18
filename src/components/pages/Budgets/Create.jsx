@@ -1,5 +1,4 @@
 
-import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Layout from "../Layout.jsx";
@@ -8,11 +7,19 @@ import axios from "../../../Lib/axios.js";
 function BudgetsCreate() {
     let { id } = useParams();
 
+    const [heads, setHeads] = useState([]);
+
     const [formData, setFormData] = useState({
         user_id: "1",
         budget_month: "",
+        transaction_head_id: "",
         amount: "",
     });
+
+    const fetchHeads = async (e) => {
+        let res = await axios.get(`transaction_head/select_option.php`);
+        setHeads(res.data.data);
+    }
 
     async function fetchBudget() {
         try {
@@ -30,6 +37,7 @@ function BudgetsCreate() {
                         ? budget.budget_month.substring(0, 7)
                         : "",
                     amount: budget.amount ?? "",
+                    transaction_head_id: budget.transaction_head_id ?? "",
                 });
             }
         } catch (error) {
@@ -48,6 +56,7 @@ function BudgetsCreate() {
     };
 
     useEffect(() => {
+        fetchHeads();
         if (id) {
             fetchBudget();
         }
@@ -61,6 +70,7 @@ function BudgetsCreate() {
                 user_id: formData.user_id,
                 budget_month: `${formData.budget_month}-01`,
                 amount: formData.amount,
+                transaction_head_id: formData.transaction_head_id,
             };
 
             let res;
@@ -121,6 +131,23 @@ function BudgetsCreate() {
                                                 onChange={handleChange}
                                                 required
                                             />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Budget Head</label>
+                                            <select
+                                                name="transaction_head_id"
+                                                className="form-control"
+                                                value={formData.transaction_head_id}
+                                                onChange={handleChange}
+                                                required
+                                            >
+                                                <option value="">Select Head</option>
+                                                {heads && heads.map((head) => (
+                                                    <option key={head.id} value={head.id}>
+                                                        {head.head_name}
+                                                    </option>
+                                                ))}
+                                            </select>
                                         </div>
 
                                         <div className="form-group">

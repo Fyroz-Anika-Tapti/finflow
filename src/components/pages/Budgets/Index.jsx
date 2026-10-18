@@ -108,6 +108,9 @@ function Budgets() {
                                                     <th>ID</th>
                                                     <th>Budget Month</th>
                                                     <th>Total Budget Amount</th>
+                                                    <th>income</th>
+                                                    <th>Cost</th>
+                                                    <th>Balance</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -128,6 +131,24 @@ function Budgets() {
                                                                 ৳{" "}
                                                                 {Number(
                                                                     budget.amount || 0
+                                                                ).toFixed(2)}
+                                                            </td>
+                                                            <td>
+                                                                ৳{" "}
+                                                                {Number(
+                                                                    budget.dr || 0
+                                                                ).toFixed(2)}
+                                                            </td>
+                                                            <td>
+                                                                ৳{" "}
+                                                                {Number(
+                                                                    budget.cr || 0
+                                                                ).toFixed(2)}
+                                                            </td>
+                                                            <td>
+                                                                ৳{" "}
+                                                                {Number(
+                                                                    (budget.dr - budget.cr) || 0
                                                                 ).toFixed(2)}
                                                             </td>
 

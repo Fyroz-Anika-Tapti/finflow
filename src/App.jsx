@@ -12,10 +12,21 @@ import TransactionCreate from "./components/pages/Transactions/Create.jsx";
 
 import Budgets from "./components/pages/Budgets/Index.jsx";
 import BudgetsCreate from "./components/pages/Budgets/Create.jsx";
-import SavingsGoals from "./components/pages/SavingsGoals.jsx";
+
+
+import Savings from "./components/pages/Savings/Index.jsx";
+import SavingsCreate from "./components/pages/Savings/Create.jsx";
+
+import GoalContributions from "./components/pages/GoalContributions/Index.jsx";
+
+
 
 import Bills from "./components/pages/Bills/Index.jsx";
 import BillsCreate from "./components/pages/Bills/Create.jsx";
+
+import Loans from "./components/pages/Loans/Index.jsx";
+import LoansCreate from "./components/pages/Loans/Create.jsx";
+
 
 import Reports from "./components/pages/Reports.jsx";
 import Settings from "./components/pages/Settings.jsx";
@@ -66,14 +77,26 @@ function App() {
             <Route path="edit/:id" element={<BudgetsCreate />} />
           </Route>
 
+          <Route path="savings">
+            <Route index element={<Savings />} />
+            <Route path="create" element={<SavingsCreate />} />
+            <Route path="edit/:id" element={<SavingsCreate />} />
+            <Route path="view/:id" element={<GoalContributions />} />
+          </Route>
 
-          <Route path="/savings" element={<SavingsGoals />} />
 
           <Route path="bills">
             <Route index element={<Bills />} />
             <Route path="create" element={<BillsCreate />} />
             <Route path="edit/:id" element={<BillsCreate />} />
           </Route>
+
+          <Route path="loans">
+            <Route index element={<Loans />} />
+            <Route path="create" element={<LoansCreate />} />
+            <Route path="edit/:id" element={<LoansCreate />} />
+          </Route>
+
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
