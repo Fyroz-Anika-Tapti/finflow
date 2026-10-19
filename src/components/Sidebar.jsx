@@ -51,6 +51,11 @@ function Sidebar() {
               Savings Goals
             </Link>
           </li>
+          {/* Income & Expense Checklist */}
+          <Link to="/income-expense" className="nav-link">
+            <i className="bi bi-check2-square me-2"></i>
+            Income & Expense Checklist
+          </Link>
 
           {/* Bills */}
           <li className="nav-item">

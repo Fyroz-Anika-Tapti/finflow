@@ -19,7 +19,7 @@ import SavingsCreate from "./components/pages/Savings/Create.jsx";
 
 import GoalContributions from "./components/pages/GoalContributions/Index.jsx";
 
-
+import IncomeExpense from "./components/pages/IncomeExpense/Index.jsx";
 
 import Bills from "./components/pages/Bills/Index.jsx";
 import BillsCreate from "./components/pages/Bills/Create.jsx";
@@ -28,7 +28,7 @@ import Loans from "./components/pages/Loans/Index.jsx";
 import LoansCreate from "./components/pages/Loans/Create.jsx";
 
 
-import Reports from "./components/pages/Reports.jsx";
+import Reports from "./components/pages/Reports/Index.jsx";
 import Settings from "./components/pages/Settings.jsx";
 import Login from "./components/pages/Login.jsx";
 import Register from "./components/pages/Register.jsx";
@@ -83,6 +83,8 @@ function App() {
             <Route path="edit/:id" element={<SavingsCreate />} />
             <Route path="view/:id" element={<GoalContributions />} />
           </Route>
+
+          <Route path="income-expense" element={<IncomeExpense />} />
 
 
           <Route path="bills">
