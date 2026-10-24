@@ -214,21 +214,7 @@ function LoansCreate() {
                             {id ? "Edit Loan" : "Add New Loan"}
                         </h3>
 
-                        <ul className="breadcrumbs mb-3">
-                            <li className="nav-home">
-                                <Link to="/">
-                                    <i className="icon-home"></i>
-                                </Link>
-                            </li>
 
-                            <li className="separator">
-                                <i className="icon-arrow-right"></i>
-                            </li>
-
-                            <li className="nav-item">
-                                <Link to="/loans">Loans</Link>
-                            </li>
-                        </ul>
                     </div>
 
                     <div className="row">
