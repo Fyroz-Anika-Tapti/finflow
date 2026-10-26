@@ -70,6 +70,39 @@ function LoansCreate() {
         }
     }, [id]);
 
+
+    useEffect(() => {
+        const { start_date, tenure_months } = formData;
+
+        if (!start_date || !tenure_months || Number(tenure_months) <= 0) {
+            return;
+        }
+
+        const startDate = new Date(start_date + "T00:00:00");
+        const months = Number(tenure_months);
+
+        // Calculate end date
+        const endDate = new Date(startDate);
+        endDate.setMonth(endDate.getMonth() + months);
+
+        // Handle month-end overflow, e.g. January 31
+        if (endDate.getDate() !== startDate.getDate()) {
+            endDate.setDate(0);
+        }
+
+        const year = endDate.getFullYear();
+        const month = String(endDate.getMonth() + 1).padStart(2, "0");
+        const day = String(endDate.getDate()).padStart(2, "0");
+
+        const calculatedEndDate = `${year}-${month}-${day}`;
+
+        setFormData((previous) => ({
+            ...previous,
+            end_date: calculatedEndDate
+        }));
+    }, [formData.start_date, formData.tenure_months]);
+
+
     const handleChange = (e) => {
         const { name, value } = e.target;
 

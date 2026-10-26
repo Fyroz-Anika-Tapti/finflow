@@ -26,6 +26,7 @@ import BillsCreate from "./components/pages/Bills/Create.jsx";
 
 import Loans from "./components/pages/Loans/Index.jsx";
 import LoansCreate from "./components/pages/Loans/Create.jsx";
+import LoanView from "./components/pages/Loans/View.jsx";
 
 
 import Reports from "./components/pages/Reports/Index.jsx";
@@ -97,6 +98,7 @@ function App() {
             <Route index element={<Loans />} />
             <Route path="create" element={<LoansCreate />} />
             <Route path="edit/:id" element={<LoansCreate />} />
+            <Route path="view/:id" element={<LoanView />} />
           </Route>
 
           <Route path="/reports" element={<Reports />} />

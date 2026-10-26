@@ -182,6 +182,13 @@ function Loans() {
 
                                                             <td>
                                                                 <Link
+                                                                    to={`/loans/view/${loan.id}`}
+                                                                    className="btn btn-sm btn-warning me-2"
+                                                                >
+                                                                    View
+                                                                </Link>
+
+                                                                <Link
                                                                     to={`/loans/edit/${loan.id}`}
                                                                     className="btn btn-sm btn-warning me-2 mb-1"
                                                                 >
