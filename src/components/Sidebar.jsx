@@ -72,6 +72,20 @@ function Sidebar() {
             </Link>
           </li>
 
+          <li className="nav-item">
+            <Link className="nav-link" to="/loan-analysis">
+              <i className="bi bi-graph-up-arrow me-2"></i>
+              Loan Analysis
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link className="nav-link" to="/payment-calendar">
+              <i className="bi bi-calendar3 me-2"></i>
+              Payment Calendar
+            </Link>
+          </li>
+
           {/* Reports */}
           <li className="nav-item">
             <Link className="nav-link" to="/reports">

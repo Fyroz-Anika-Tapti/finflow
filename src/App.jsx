@@ -28,6 +28,10 @@ import Loans from "./components/pages/Loans/Index.jsx";
 import LoansCreate from "./components/pages/Loans/Create.jsx";
 import LoanView from "./components/pages/Loans/View.jsx";
 
+import LoanAnalysis from "./components/pages/LoanAnalysis/Index.jsx";
+
+import PaymentCalendar from "./components/pages/PaymentCalendar/Index.jsx";
+
 
 import Reports from "./components/pages/Reports/Index.jsx";
 import Settings from "./components/pages/Settings.jsx";
@@ -99,6 +103,14 @@ function App() {
             <Route path="create" element={<LoansCreate />} />
             <Route path="edit/:id" element={<LoansCreate />} />
             <Route path="view/:id" element={<LoanView />} />
+          </Route>
+
+          <Route path="loan-analysis">
+            <Route index element={<LoanAnalysis />} />
+          </Route>
+
+          <Route path="payment-calendar">
+            <Route index element={<PaymentCalendar />} />
           </Route>
 
           <Route path="/reports" element={<Reports />} />
